@@ -1,0 +1,58 @@
+{% if dayRangeCount %}
+
+    <hr>
+
+    <h1>Pageviews in last month</h1>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Pageviews</th>
+                <th>Time on Site</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day in dayRangeCount %}
+                <tr>
+                    <td>{{ day.date }}</td>
+                    <td>{{ day.count }}</td>
+                    <td>{{ day.timeOnSite }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the last month.</div>
+{% endif %}
+
+{% if monthlyCount %}
+
+    <br>
+    <br>
+
+    <h1>Pageviews per month</h1>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Pageviews</th>
+                <th>Time on Site</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month in monthlyCount %}
+                <tr>
+                    <td>{{ month.month }}</td>
+                    <td>{{ month.total_count }}</td>
+                    <td>-</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the months.</div>
+{% endif %}
