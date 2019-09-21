@@ -9,7 +9,9 @@
             <tr>
                 <th>Date</th>
                 <th>Pageviews</th>
-                <th>Time on Site</th>
+                <th>Unique pageviews</th>
+                <th>Quality pageviews</th>
+                <th>Quality unique pageviews</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +19,9 @@
                 <tr>
                     <td>{{ day.date }}</td>
                     <td>{{ day.count }}</td>
-                    <td>{{ day.timeOnSite }}</td>
+                    <td>{{ day.uniqueCount }}</td>
+                    <td><strong>{{ day.qualityCount }}</strong></td>
+                    <td>{{ day.qualityUniqueCount }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -39,7 +43,9 @@
             <tr>
                 <th>Month</th>
                 <th>Pageviews</th>
-                <th>Time on Site</th>
+                <th>Unique pageviews</th>
+                <th>Quality pageviews</th>
+                <th>Quality unique pageviews</th>
             </tr>
         </thead>
         <tbody>
@@ -47,12 +53,14 @@
                 <tr>
                     <td>{{ month.month }}</td>
                     <td>{{ month.total_count }}</td>
-                    <td>-</td>
+                    <td>{{ month.total_unique_count }}</td>
+                    <td><strong>{{ month.total_quality_count }}</strong></td>
+                    <td>{{ month.total_quality_unique_count }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
 {% else %}
-    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the months.</div>
+    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the previous months.</div>
 {% endif %}

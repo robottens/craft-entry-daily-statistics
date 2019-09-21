@@ -26,7 +26,9 @@ class Install extends Migration
                 'date' => $this->date()->notNull(),
                 'entryId' => $this->integer()->notNull(),
                 'count' => $this->integer()->defaultValue(0)->notNull(),
-                'timeOnSite' => $this->integer()->defaultValue(0)->notNull()
+                'uniqueCount' => $this->integer()->defaultValue(0)->notNull(),
+                'qualityCount' => $this->integer()->defaultValue(0)->notNull(),
+                'qualityUniqueCount' => $this->integer()->defaultValue(0)->notNull(),
             ]);
 
             $this->createIndex(null, '{{%entrycount}}', 'date', false);

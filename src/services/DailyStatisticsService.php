@@ -71,13 +71,19 @@ class DailyStatisticsService extends Component
     public function getMonthlyCount($entryId) {
 
         $records = DailyStatisticsRecord::find()
-            ->select(['DATE_FORMAT(date,  "%m-%Y") AS month', 'COUNT(count) AS total_count'])
+            ->select([
+                'DATE_FORMAT(date, "%m-%Y") AS month',
+                'SUM(count) AS total_count',
+                'SUM(uniqueCount) AS total_unique_count',
+                'SUM(qualityCount) AS total_quality_count',
+                'SUM(qualityUniqueCount) AS total_quality_unique_count'
+            ])
             ->where(['entryId' => $entryId])
             ->groupBy(['month'])
             ->orderBy('month DESC')
             ->all();
 
-        //die(var_dump($records->createCommand()->getRawSql()) );
+        // die(var_dump($records->createCommand()->getRawSql()) );
 
         return $records;
     }

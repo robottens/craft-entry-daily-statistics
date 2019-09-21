@@ -2,7 +2,7 @@
   "name": "robottens/dailystatistics",
   "license": "MIT",
   "description": "Count the daily statistics for Craft entries.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "craft-plugin",
   "minimum-stability": "dev",
   "require": {

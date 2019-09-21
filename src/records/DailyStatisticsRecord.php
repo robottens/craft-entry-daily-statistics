@@ -17,6 +17,9 @@ class DailyStatisticsRecord extends ActiveRecord
     public $month;
 
     public $total_count;
+    public $total_unique_count;
+    public $total_quality_count;
+    public $total_quality_unique_count;
 
     // Public Static Methods
     // =========================================================================
