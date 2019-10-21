@@ -2,6 +2,7 @@
 namespace robottens\dailystatistics;
 
 use Craft;
+use craft\web\UrlManager;
 use craft\base\Plugin;
 use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
@@ -10,6 +11,7 @@ use robottens\dailystatistics\fields\DailyStatisticsField;
 use robottens\dailystatistics\services\DailyStatisticsService;
 use robottens\dailystatistics\variables\DailyStatisticsVariable;
 use yii\base\Event;
+use craft\events\RegisterUrlRulesEvent;
 
 class DailyStatistics extends Plugin
 {
@@ -36,6 +38,15 @@ class DailyStatistics extends Plugin
 			[$this, 'onRegisterFieldTypes']
 		);
 
+        // Register our CP routes
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['dailystatistics'] = 'dailystatistics/dashboard/index';
+            }
+        );
+
         // Register variable
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {
             /** @var CraftVariable $variable */
@@ -48,11 +59,4 @@ class DailyStatistics extends Plugin
 	{
 		$event->types[] = DailyStatisticsField::class;
 	}
-
-    public function getCpNavItem() {
-
-        $item = parent::getCpNavItem();
-
-        return $item;
-    }
 }
