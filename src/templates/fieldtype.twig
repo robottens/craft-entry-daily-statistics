@@ -1,0 +1,66 @@
+{% if dayRangeCount %}
+
+    <hr>
+
+    <h1>Pageviews in last month</h1>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Pageviews</th>
+                <th>Unique pageviews</th>
+                <th>Quality pageviews</th>
+                <th>Quality unique pageviews</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day in dayRangeCount %}
+                <tr>
+                    <td>{{ day.date }}</td>
+                    <td>{{ day.count }}</td>
+                    <td>{{ day.uniqueCount }}</td>
+                    <td><strong>{{ day.qualityCount }}</strong></td>
+                    <td>{{ day.qualityUniqueCount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the last month.</div>
+{% endif %}
+
+{% if monthlyCount %}
+
+    <br>
+    <br>
+
+    <h1>Pageviews per month</h1>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Pageviews</th>
+                <th>Unique pageviews</th>
+                <th>Quality pageviews</th>
+                <th>Quality unique pageviews</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month in monthlyCount %}
+                <tr>
+                    <td>{{ month.month }}</td>
+                    <td>{{ month.total_count }}</td>
+                    <td>{{ month.total_unique_count }}</td>
+                    <td><strong>{{ month.total_quality_count }}</strong></td>
+                    <td>{{ month.total_quality_unique_count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <div class="uk-alert-primary" uk-alert>There is no pageviews data for the previous months.</div>
+{% endif %}
