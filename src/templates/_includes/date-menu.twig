@@ -1,0 +1,18 @@
+{% import "_includes/forms" as forms %}
+
+{% set baseUrl = "dailystatistics/" ~ currentSiteHandle ~ "/" %}
+{% set params = [] %}
+
+<div id="dates-btn" class="btn menubtn" data-icon="date">{{ selectedMonth }}</div>
+<div class="menu">
+    <ul class="padded">
+        {% for date in dates %}
+            <li>
+                {% set url = url(baseUrl ~ date, params) %}
+                <a href="{{ url }}">
+                    {{ date }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

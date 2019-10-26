@@ -1,6 +1,32 @@
 {% extends "_layouts/cp" %}
 {% set title = "Content Pageview Statistics" %}
 
+{% block contextMenu %}
+    {% include "dailystatistics/_includes/sites-menu.twig" %}
+    {% include "dailystatistics/_includes/date-menu.twig" %}
+{% endblock %}
+
 {% block content %}
-    <p>Statistics coming soon...</p>
+
+    <p>Below are the recent pageviews on content. These are the views on actual articles.</p>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Pageviews</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for record in records %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>{{ record.total_count | number_format }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
 {% endblock %}

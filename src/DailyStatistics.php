@@ -44,6 +44,8 @@ class DailyStatistics extends Plugin
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['dailystatistics'] = 'dailystatistics/dashboard/index';
+                $event->rules['dailystatistics/<siteHandle:{handle}>'] = 'dailystatistics/dashboard/index';
+                $event->rules['dailystatistics/<siteHandle:{handle}>/<date:\d{4}-\d{2}>'] = 'dailystatistics/dashboard/index';
             }
         );
 
