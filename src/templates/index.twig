@@ -8,6 +8,8 @@
 
 {% block content %}
 
+    <h2>Article pageviews</h2>
+
     <p>Below are the recent pageviews on content. These are the views on actual articles.</p>
 
     <table class="data fullwidth collapsible">
@@ -24,6 +26,41 @@
                 <td>{{ record.date }}</td>
                 <td>{{ record.total_count | number_format }}</td>
             </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <h2>Most popular</h2>
+
+    <p>Below are the most popular articles. Pageviews are for this month, not total. You might want to keep popular articles up to date by editing them from time to time and bumping them to the top again.</p>
+
+    <table class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th style="width:100%;">Article</th>
+                <th>Pageviews</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for i, entry in entries %}
+
+            {% set article = craft.entries().id(entry.entryId).one() %}
+
+            {% if article %}
+                <tr>
+                    <td>{{ i + 1 }}.</td>
+                    <td>{{ article.link }}</td>
+                    <td>{{ entry.total_count | number_format }}</td>
+                    <td><a href="{{ article.getCpEditUrl() }}">Edit</a></td>
+                </tr>
+            {% endif %}
+
         {% endfor %}
 
         </tbody>

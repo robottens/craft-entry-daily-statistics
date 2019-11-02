@@ -58,6 +58,28 @@ class DashboardController extends Controller {
 
         $variables['records'] = $records;
 
+        // Get the popular articles for the current site
+        $entries = DailyStatisticsRecord::find()
+            ->select([
+                'entryId',
+                'DATE_FORMAT(date, "%m-%Y") AS month',
+                'SUM(count) AS total_count',
+                'SUM(uniqueCount) AS total_unique_count',
+                'SUM(qualityCount) AS total_quality_count',
+                'SUM(qualityUniqueCount) AS total_quality_unique_count'
+            ])
+            ->join('INNER JOIN', 'content', 'content.elementId = entrycount.entryId')
+            ->where([
+                'content.siteId' => $siteId,
+                'DATE_FORMAT(date, "%Y-%m")' => $month
+            ])
+            ->groupBy(['entryId'])
+            ->orderBy('total_count DESC')
+            ->limit(50)
+            ->all();
+
+        $variables['entries'] = $entries;
+
         // Render the page
         $this->renderTemplate('dailystatistics/index', $variables);
     }
